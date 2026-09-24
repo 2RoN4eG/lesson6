@@ -1,5 +1,20 @@
+# ## Задание 4* - функция flatten_list()
+
+# Написать функцию `flatten_list(lst)`, которая принимает вложенный список и возвращает плоский список.
+
+# Пример:  
+# `flatten_list([1, [2, [3, 4], 5], 6]) → [1, 2, 3, 4, 5, 6]`
+
+
 def flatten_list(lst):
-    pass # тут ваш код 
+    res = []
+    for el in lst:
+        if isinstance(el, list):
+            res += flatten_list(el)
+        else:
+            res.append(el)
+
+    return res
 
 
 assert flatten_list([1, [2, 3]]) == [1, 2, 3], "Ожидался простой плоский список"
