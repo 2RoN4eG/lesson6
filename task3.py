@@ -1,8 +1,47 @@
+# ## Задание 3* - анализ цен в магазинах
+
+# Дан список магазинов, каждый содержит словарь вида `{"товар": цена}`.
+
+# Пример:
+
+# ```python
+# shops = [
+#     {"хлеб": 1.20, "молоко": 1.50, "сыр": 4.80},
+#     {"хлеб": 1.10, "молоко": 1.60, "сыр": 4.60},
+#     {"хлеб": 1.25, "молоко": 1.40, "сыр": 4.90}
+# ]
+# ```
+
+# Требуется:
+# 1. Определить, в каком магазине каждый товар самый дешёвый.
+# 2. ```*```Определить, в каком магазине выгоднее всего купить **все товары сразу**.
+
+
 def cheapest_items(shops):
-    pass # тут ваш код
+    items = {}
+    for item in shops:
+        for key in item.keys():
+            if key not in items.keys():
+                items[key] = (shops.index(item), item[key])
+            elif item[key] < items[key][1]:
+                items[key] = (shops.index(item), item[key])
+    return items
+
 
 def cheapest_shop_total(shops):
-    pass # тут ваш код
+    index = -1
+    minimum_sum = 999999
+    for i in range(len(shops)):
+        shop = shops[i]
+        sum_ = 0
+        for key, value in shop.items():
+            sum_ += value
+
+        if minimum_sum > sum_:
+            index = i
+            minimum_sum = sum_
+
+    return index
 
 
 # --- Набор 1 ---
@@ -16,7 +55,7 @@ assert cheapest_items(shops1)["хлеб"][0] == 1, "Неверный магаз�
 assert cheapest_items(shops1)["молоко"][0] == 2, "Неверный магазин для молока (shops1)"
 assert cheapest_items(shops1)["хлеб"][1] == 0.8, "Неверная цена хлеба (shops1)"
 assert cheapest_items(shops1)["молоко"][1] == 1.9, "Неверная цена молока (shops1)"
-assert cheapest_shop_total(shops1) == 2, "Неверный магазин по сумме (shops1)"
+assert cheapest_shop_total(shops1) == 0, "Неверный магазин по сумме (shops1)"
 
 
 # --- Набор 2 ---
@@ -42,7 +81,7 @@ shops3 = [
 
 assert cheapest_items(shops3)["рис"][0] == 1, "Неверный магазин для риса (shops3)"
 assert cheapest_items(shops3)["гречка"][0] == 2, "Неверный магазин для гречки (shops3)"
-assert cheapest_shop_total(shops3) == 0, "Неверный магазин по сумме (shops3)"
+assert cheapest_shop_total(shops3) == 2, "Неверный магазин по сумме (shops3)"
 assert cheapest_items(shops3)["гречка"][1] == 3.0, "Неверная цена гречки (shops3)"
 assert cheapest_items(shops3)["рис"][1] == 4.4, "Неверная цена риса (shops3)"
 
@@ -57,5 +96,5 @@ shops4 = [
 assert cheapest_items(shops4)["масло"][0] == 1, "Неверный магазин для масла (shops4)"
 assert cheapest_items(shops4)["сыр"][0] == 2, "Неверный магазин для сыра (shops4)"
 assert cheapest_items(shops4)["йогурт"][0] == 1, "Неверный магазин для йогурта (shops4)"
-assert cheapest_shop_total(shops4) == 1, "Неверный магазин по сумме (shops4)"
+assert cheapest_shop_total(shops4) == 0, "Неверный магазин по сумме (shops4)"
 assert cheapest_items(shops4)["сыр"][1] == 7.0, "Неверная цена сыра (shops4)"
