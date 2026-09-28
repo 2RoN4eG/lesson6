@@ -10,7 +10,7 @@ def most_common_word(text):
 
     dictionary = dict()
     for word in words:
-        stripped = word.strip(".!?")
+        stripped = word.strip(".,:;!?\"'")
         if stripped in dictionary:
             dictionary[stripped] += 1
         else:

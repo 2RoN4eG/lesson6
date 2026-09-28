@@ -21,7 +21,7 @@ def sequence(*args):
     elif len(args) == 2 and args[0] > args[1]:
         return tuple(el for el in range(args[1], args[0] + 1))
     elif len(args) > 2:
-        return tuple(el for el in args)
+        return args
 
 
 assert sequence(5) == (0, 1, 2, 3, 4, 5), "Ожидался диапазон от 0 до 5"
