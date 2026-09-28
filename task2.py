@@ -10,11 +10,8 @@ def most_common_word(text):
 
     dictionary = dict()
     for word in words:
-        stripped = word.strip(".,:;!?\"'")
-        if stripped in dictionary:
-            dictionary[stripped] += 1
-        else:
-            dictionary[stripped] = 1
+        stripped = word.strip("-.,:;!?\"'")
+        dictionary[stripped] = dictionary.get(stripped, 0) + 1
 
     maximum_value = 0
     maximum_key = ""
